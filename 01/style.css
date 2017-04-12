@@ -29,6 +29,10 @@ body {
   transition: all 0.07s;
 }
 
+.key:hover {
+  background: hsla(0, 0%, 100%, .8);
+}
+
 .sound {
   color: var(--watermelon);
   font-size: 17px;

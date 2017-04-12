@@ -17,7 +17,7 @@ body {
 }
 
 .key {
-  font-size: 20px;
+  font-size: 30px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -31,7 +31,7 @@ body {
 
 .sound {
   color: var(--watermelon);
-  font-size: 14px;
+  font-size: 17px;
 }
 
 .highlight {

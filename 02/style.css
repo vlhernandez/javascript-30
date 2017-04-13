@@ -1,0 +1,43 @@
+:root {
+  --pale-gold: #C0B283;
+  --silk: #dcd0c0;
+  --paper: #f4f4f4;
+  --charcoal: #373737;
+
+  --fuschia: #a239ca;
+  --jewel: #4717f6;
+  --stark: #37dfdd;
+  --void: #0e0b15;
+
+  --ink: #062f4f;
+  --posy: #813772;
+  --embers: #b82601;
+}
+body {
+  background-image: url("https://unsplash.it/1600/2400?image=959");
+}
+
+.clock {
+  display: flex;
+  margin: auto;
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.clock-face {
+  border: 10px solid var(--silk);
+  border-radius: 50%;
+  width: 400px;
+  height: 400px;
+  position: relative;
+}
+
+.hour-hand {
+  height: 10px;
+  width: 45%;
+  background: var(--posy);
+  position: absolute;
+  top: 50%;
+  right: 50%;
+}

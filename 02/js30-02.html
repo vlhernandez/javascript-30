@@ -26,7 +26,7 @@
   const tick = document.querySelector('.tick');
   const cuckoo = document.querySelector('.cuckoo');
 
-  function setTime(t) {
+  function setTime(x) {
     const date = new Date();
 
     const s = date.getSeconds();
@@ -50,8 +50,12 @@
       playCuckoo();
     }
 
-    if (t) {
-      return(h)
+    if (x) {
+      if (h > 12) {
+        return(h - 12);
+      } else {
+        return(h)
+      }
     }
   }
 
@@ -64,11 +68,11 @@
   }
 
   function loopCuckoo() {
-    const currHr = setTime("hour")
+    const currHr = setTime("getHour")
 
     if (numLoops == currHr - 1) {
       cuckoo.removeEventListener('ended', loopCuckoo, false);
-      numPlays = 0;
+      numLoops = 0;
     } else {
       cuckoo.currentTime = 0;
       cuckoo.play();

@@ -41,8 +41,8 @@ body {
   width: 20px;
   border-radius: 50%;
   position: absolute;;
-  top: 49%;
-  left: 47.5%;
+  top: 48%;
+  left: 46.75%;
   background-color: var(--silk);
 }
 
@@ -61,6 +61,8 @@ body {
 
 .hour-hand {
   background: var(--ink);
+  width: 40%;
+  right: 51%;
 }
 
 .minute-hand {

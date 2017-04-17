@@ -26,7 +26,7 @@
   const tick = document.querySelector('.tick');
   const cuckoo = document.querySelector('.cuckoo');
 
-  function setTime() {
+  function setTime(t) {
     const date = new Date();
 
     const s = date.getSeconds();
@@ -41,14 +41,39 @@
     const m = date.getMinutes();
     const mDeg = ((m / 60) * 360) + ((s/60)*6) + 90;
     minHand.style.transform = `rotate(${mDeg}deg)`;
-    if (m === 0) {
-      cuckoo.play()
-    }
 
     const h = date.getHours();
     const hDeg = ((h / 12) * 360) + ((m/60)*30) + 90 ;
     hrHand.style.transform = `rotate(${hDeg}deg)`;
 
+    if (m === 0  && s === 0 ) {
+      playCuckoo();
+    }
+
+    if (t) {
+      return(h)
+    }
+  }
+
+  var numLoops = 0;
+
+  function playCuckoo() {
+    cuckoo.currentTime = 0;
+    cuckoo.play();
+    cuckoo.addEventListener('ended', loopCuckoo, false);
+  }
+
+  function loopCuckoo() {
+    const currHr = setTime("hour")
+
+    if (numLoops == currHr - 1) {
+      cuckoo.removeEventListener('ended', loopCuckoo, false);
+      numPlays = 0;
+    } else {
+      cuckoo.currentTime = 0;
+      cuckoo.play();
+      numLoops++;
+    }
   }
 
   setInterval(setTime, 1000);

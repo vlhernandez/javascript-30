@@ -14,7 +14,7 @@
   --embers: #b82601;
 }
 body {
-  background-image: url("https://unsplash.it/1600/2400?image=959");
+  background-image: url("https://unsplash.it/1600/2400?image=959&blur");
   display: flex;
   margin: auto;
   min-height: 100vh;

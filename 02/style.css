@@ -1,17 +1,6 @@
 :root {
-  --pale-gold: #C0B283;
-  --silk: #dcd0c0;
-  --paper: #f4f4f4;
-  --charcoal: #373737;
-
-  --fuschia: #a239ca;
-  --jewel: #4717f6;
-  --stark: #37dfdd;
-  --void: #0e0b15;
-
-  --ink: #062f4f;
-  --posy: #813772;
   --embers: #b82601;
+  --rosy: #a56570;
 }
 body {
   background-image: url("https://unsplash.it/1600/2400?image=959&blur");
@@ -23,11 +12,13 @@ body {
 }
 
 .clock {
-  border: 10px solid var(--pale-gold);
+  border: 16px solid var(--rosy);
   border-radius: 50%;
   width: 400px;
   height: 400px;
   padding: 10px;
+  background: rgba(0,0,0,.4);
+  box-shadow: inset 0 0 19px rgb(203, 101, 112)
 }
 
 .clock-face {
@@ -43,7 +34,11 @@ body {
   position: absolute;;
   top: 48%;
   left: 46.75%;
-  background-color: var(--silk);
+  background-color: #eee;
+  box-shadow: 5px 0px 5px -3px black,
+              -5px 0px 5px -3px black,
+              0 5px 5px -3px black,
+              0 -5px 5px -3px black;
 }
 
 
@@ -56,19 +51,15 @@ body {
   transform: rotate(90deg);
   transition: all 0.5s;
   transition-timing-function: cubic-bezier(0, 2, 0, -.05);
-  background: var(--posy);
+  background: linear-gradient(#eee, #bbb);
 }
 
 .hour-hand {
-  background: var(--ink);
   width: 40%;
   right: 51%;
 }
 
-.minute-hand {
-}
-
 .second-hand {
   height: 5px;
-  background: var(--silk);
+  background: var(--embers);
 }

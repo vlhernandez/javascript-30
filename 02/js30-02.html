@@ -40,6 +40,10 @@
 
     const m = date.getMinutes();
     const mDeg = ((m / 60) * 360) + ((s/60)*6) + 90;
+    if (s === 59 && m  === 59 ) {
+      secHand.style.transition = "none";
+      secHand.style.transitionTimingFunction = "none";
+    }
     minHand.style.transform = `rotate(${mDeg}deg)`;
 
     const h = date.getHours();

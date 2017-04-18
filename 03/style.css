@@ -1,0 +1,15 @@
+:root {
+  --base-color: #ff5252;
+  --blur: 3px;
+  --spacing: 10px;
+}
+
+.highlight {
+  color: var(--base-color);
+}
+
+.control-me {
+  filter: blur(var(--blur));
+  padding: var(--spacing);
+  background-color: var(--base-color);
+}

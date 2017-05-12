@@ -4,11 +4,45 @@
   --spacing: 10px;
 }
 
+body {
+  background-color: rgb(38, 38, 38);
+  color: #ccc;
+  font-family: "Rubik", sans-serif;
+}
+
+h1 {
+  text-align: center;
+  font-size: 3em;
+}
+
 .highlight {
   color: var(--base-color);
 }
 
+.cntrl-inputs {
+  display: table;
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 2em;
+}
+
+label {
+  font-size: 1.5em;
+  margin: .5em;
+  display: table-cell;
+  width: 30%;
+}
+
+input[type="color"],
+input[type="range"] {
+  width: 100px;
+  display: block;
+  margin: 10px 0;
+}
+
 .control-me {
+  margin: auto;
+  display: block;
   filter: blur(var(--blur));
   padding: var(--spacing);
   background-color: var(--base-color);

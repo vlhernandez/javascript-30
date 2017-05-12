@@ -42,16 +42,24 @@
     const inventorNames = inventors.map( function( inventor )  {
       return `${inventor.last}, ${inventor.first}`;
     });
-    console.log(inventorNames)
 
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
+    const bdays = inventors.sort( function(inventorA, inventorB)  {
+      return inventorB.year - inventorA.year;
+    });
 
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live?
+    const yearsLived = inventors.reduce(function( acc, inventor ) {
+      return acc + (inventor.passed - inventor.year);
+    }, 0 );
 
     // 5. Sort the inventors by years lived
+    const yearsLivedOrder = inventors.sort(function( inventorA, inventorB ) {
+      return (inventorB.passed - inventorB.year) - (inventorA.passed - inventorA.year);
+    })
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris

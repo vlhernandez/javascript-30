@@ -17,6 +17,35 @@
 <script>
 const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
 
+const ogData= [];
+const searchInput = document.querySelector('input.search');
+
+fetch(endpoint)
+  .then( response =>  response.json() )
+  .then( data => {
+    data.forEach( item => ogData.push(item) );
+  });
+
+function searchData( placeToLookFor, arr ) {
+  const searchPattern = new RegExp(`${placeToLookFor}`, 'gi');
+
+  return arr.filter( function( data ) {
+     return data.city.match(searchPattern) || data.state.match(searchPattern);
+  });
+}
+
+function displayData() {
+  const places = searchData(this.value, ogData);
+  const suggestions = document.querySelector('.suggestions')
+
+  const html = places.map( place => {
+    return `<li>${place.city}, ${place.state}</li>`;
+  }).join('');
+  suggestions.innerHTML =  html;
+}
+
+searchInput.addEventListener('input', displayData);
+
 </script>
   </body>
 </html>

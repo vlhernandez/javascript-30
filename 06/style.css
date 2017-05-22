@@ -1,0 +1,62 @@
+:root {
+  --dark: #262626;
+  --gray: #333;
+}
+
+body {
+  background-color: var(--dark);
+  color: #d1d1d1;
+  font-family: 'Oxygen Mono', monospace;
+  font-size: 20px;
+}
+
+.search-form {
+  border: 5px solid rgba(0,0,0,.2);
+  max-width: 500px;
+  margin: 10px auto;
+  padding: 40px;
+}
+
+.search-bar {
+  display: block;
+  font-family: 'Oxygen Mono', monospace;
+  background-color: var(--gray);
+  border: 5px solid rgba(0,0,0,.2);
+  color: #d1d1d1;
+  font-size: 20px;
+  padding: 10px;
+  margin: 10px auto 0 10px;
+  width: 90%;
+  text-align: center;
+}
+
+.search-bar:focus,
+.search-bar:active {
+  border: 5px solid rgba(80,184,180,.6);
+  outline: 2px solid rgba(80, 184, 180, 1);
+}
+
+.suggestions {
+  padding-left: 0;
+  margin-left: 20px;
+  list-style-type: none;
+  max-width: 80%;
+}
+
+.suggestions.results {
+  padding-left: 0;
+  margin: 0 auto;
+}
+
+.results li {
+  padding: 10px 20px;
+  color: #000;
+}
+.results li:nth-child(odd) {
+  background-image: linear-gradient( to top, var(--dark), #C6FFFA );
+  transform: skewX(-10deg);
+}
+.results li:nth-child(even) {
+  background-image: linear-gradient(to top, #C6FFFA, var(--dark));
+  transform: skewX(10deg) translateY(.25px);
+}

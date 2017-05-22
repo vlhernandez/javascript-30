@@ -2,13 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Type Ahead 👀</title>
+  <title>Type Ahead</title>
   <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css?family=Oxygen+Mono" rel="stylesheet">
 </head>
 <body>
 
   <form class="search-form">
-    <input type="text" class="search" placeholder="City or State">
+    <input type="text" class="search-bar" placeholder="City or State">
     <ul class="suggestions">
       <li>Filter for a city</li>
       <li>or a state</li>
@@ -18,7 +19,7 @@
 const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
 
 const ogData= [];
-const searchInput = document.querySelector('input.search');
+const searchInput = document.querySelector('input.search-bar');
 
 fetch(endpoint)
   .then( response =>  response.json() )
@@ -41,7 +42,14 @@ function displayData() {
   const html = places.map( place => {
     return `<li>${place.city}, ${place.state}</li>`;
   }).join('');
+
   suggestions.innerHTML =  html;
+
+
+  if ( !suggestions.classList.contains('results') ) {
+    suggestions.classList.add('results');
+  }
+
 }
 
 searchInput.addEventListener('input', displayData);

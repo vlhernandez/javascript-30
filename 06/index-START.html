@@ -40,7 +40,11 @@ function displayData() {
   const suggestions = document.querySelector('.suggestions')
 
   const html = places.map( place => {
-    return `<li>${place.city}, ${place.state}</li>`;
+    const regex = new RegExp( this.value, 'gi');
+    const city = place.city.replace(regex, `<span class="accent">${this.value}</span>`);
+    const state = place.state.replace(regex, `<span class="accent">${this.value}</span>`);
+
+    return `<li><span>${city}, ${state}</span><span class="pop">${place.population}</span></li>`;
   }).join('');
 
   suggestions.innerHTML =  html;

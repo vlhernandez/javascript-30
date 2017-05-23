@@ -7,9 +7,6 @@
       margin: 0;
       padding: 0;
     }
-    canvas {
-      border: 3px solid hotpink;
-    }
   </style>
 </head>
 <body>
@@ -17,22 +14,51 @@
 
   <script>
     const canvas = document.querySelector('#sketchbook');
-    const ctx = canvas.getContext('2d');
-    ctx.strokeStyle = 'hotpoink';
-    ctx.lineWidth = 10;
-    ctx.lineCap = 'round';
-    ctx.lineJoin = 'round';
-    ctx.stroke();
-
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
+    const ctx = canvas.getContext('2d');
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+
+    let mouseDownPositionX = 0;
+    let mouseDownPositionY = 0;
+    let isDrawing = false;
+    let strokeHue = 0;
+    let lineWidth = 1;
+
+
     function sketch(e) {
-      console.log(e);
+      if ( !isDrawing ) return;
+
+      if ( strokeHue >= 360 ) {
+        strokeHue = 0;
+      }
+
+      if ( lineWidth > 0 && lineWidth != 200 ) {
+        lineWidth++;
+      } else if (lineWidth == 200) {
+        lineWidth--;
+      }
+
+      strokeHue++;
+
+      ctx.beginPath();
+      ctx.strokeStyle = `hsl(${strokeHue}, 100%, 50% )`;
+      ctx.lineWidth = lineWidth;
+      ctx.moveTo( mouseDownPositionX, mouseDownPositionY );
+      ctx.lineTo( e.offsetX, e.offsetY );
+      ctx.stroke();
     }
 
-
-    canvas.addEventListener('mousedown', sketch)
+    canvas.addEventListener( 'mousedown', function(e) {
+        isDrawing = true;
+        mouseDownPositionX = e.offSetX;
+        mouseDownPositionX = e.offSetY;
+    } );
+    canvas.addEventListener( 'mouseup', () => isDrawing = false );
+    canvas.addEventListener( 'mouseout', () => isDrawing = false )
+    canvas.addEventListener( 'mousemove', sketch );
 
   </script>
 </body>

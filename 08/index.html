@@ -18,9 +18,22 @@
   <script>
     const canvas = document.querySelector('#sketchbook');
     const ctx = canvas.getContext('2d');
+    ctx.strokeStyle = 'hotpoink';
+    ctx.lineWidth = 10;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    ctx.stroke();
 
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
+
+    function sketch(e) {
+      console.log(e);
+    }
+
+
+    canvas.addEventListener('mousedown', sketch)
+
   </script>
 </body>
 </html>

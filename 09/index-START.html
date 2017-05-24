@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Console Tricks!</title>
+</head>
+<body>
+
+  <p onClick="makeGreen()">×BREAK×DOWN×</p>
+
+  <script>
+    const dogs = [{ name: 'Snickers', age: 2 }, { name: 'hugo', age: 8 }];
+
+    function makeGreen() {
+      const p = document.querySelector('p');
+      p.style.color = '#BADA55';
+      p.style.fontSize = '50px';
+    }
+
+    // Regular
+    console.log("sup");
+
+    // Interpolated
+    console.log("sup, my name is %s", "Penny");
+
+    // Styled
+    console.log("my favorite color is " + "%cgreen", "font-size: 40px; color: green; font-variant:small-caps; text-transform:capitalize");
+
+    // warning!
+    console.warn("oops! is that a mistake????")
+
+    // Error :|
+    console.error("NO, it wasn't a mistake, it's an ERROR!");
+
+    // Info
+    console.info("Here's something intereresting...");
+
+    // Testing
+    const p = document.querySelector('p');
+    console.assert( p.classList.contains('aclass'), "ugh, no, that's wrong" );
+
+    // clearing
+    console.clear();
+
+    // Viewing DOM Elements
+    console.log(p)
+    console.dir(p)
+
+    // Grouping together
+    dogs.forEach( dog => {
+      console.group(`${dog.name}`);
+      console.log(`This is ${dog.name}`);
+      console.log(`${dog.name} is ${dog.age} years old`);
+      console.log(`${dog.name} is ${dog.age * 7 } dog years old`);
+      console.groupEnd(`${dog.name}`);
+    });
+
+    console.log('%c\nThis is with group collapsed', 'background:gray; color: white; font-size:16px' )
+    dogs.forEach( dog => {
+      console.groupCollapsed(`${dog.name}`);
+      console.log(`This is ${dog.name}`);
+      console.log(`${dog.name} is ${dog.age} years old`);
+      console.log(`${dog.name} is ${dog.age * 7 } dog years old`);
+      console.groupEnd(`${dog.name}`);
+    });
+
+    // counting
+    console.count('why?');
+    console.count('why?');
+    console.count('why?');
+    console.count('why?');
+    console.count('hmmm...');
+
+    // timing
+
+    console.time('fetching data');
+    fetch('https://api.nasa.gov/planetary/apod?api_key=NNKOjkoul8n1CH18TWA9gwngW1s1SmjESPjNoUFo')
+    .then( data => data.json())
+    .then( data => {
+      console.timeEnd('fetching data');
+      console.log(data);
+
+    console.table( dogs );
+    })
+  </script>
+</body>
+</html>

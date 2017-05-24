@@ -25,37 +25,42 @@
     let mouseDownPositionY = 0;
     let isDrawing = false;
     let strokeHue = 0;
+    let toggleLineWidth= true;
     let lineWidth = 1;
 
 
     function sketch(e) {
       if ( !isDrawing ) return;
 
+      strokeHue++;
       if ( strokeHue >= 360 ) {
         strokeHue = 0;
       }
 
-      if ( lineWidth > 0 && lineWidth != 200 ) {
-        lineWidth++;
-      } else if (lineWidth == 200) {
-        lineWidth--;
+      if ( lineWidth > 100 || lineWidth < 1) {
+        toggleLineWidth = !toggleLineWidth;
       }
-
-      strokeHue++;
 
       ctx.beginPath();
       ctx.strokeStyle = `hsl(${strokeHue}, 100%, 50% )`;
-      ctx.lineWidth = lineWidth;
+
+      if ( toggleLineWidth ) {
+        ctx.lineWidth = lineWidth++
+      } else {
+        ctx.lineWidth = lineWidth--;
+      }
+
       ctx.moveTo( mouseDownPositionX, mouseDownPositionY );
       ctx.lineTo( e.offsetX, e.offsetY );
       ctx.stroke();
     }
 
     canvas.addEventListener( 'mousedown', function(e) {
-        isDrawing = true;
-        mouseDownPositionX = e.offSetX;
-        mouseDownPositionX = e.offSetY;
+      isDrawing = true;
+      mouseDownPositionX = e.offSetX;
+      mouseDownPositionX = e.offSetY;
     } );
+
     canvas.addEventListener( 'mouseup', () => isDrawing = false );
     canvas.addEventListener( 'mouseout', () => isDrawing = false )
     canvas.addEventListener( 'mousemove', sketch );

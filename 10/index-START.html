@@ -104,52 +104,26 @@
   </div>
 
 <script>
-  let holdingShift = false;
   const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-  let lastSelectedItem;
-
-  document.addEventListener( 'keydown', isShiftKeyDown );
-  document.addEventListener( 'keyup', isShiftKeyDown )
   checkboxes.forEach( checkbox => checkbox.addEventListener( 'click', selectMultiBoxes ));
-
-  function isShiftKeyDown( e ) {
-    //only care about select keys
-    if (e.which != 16) return;
-
-    if (e.type == 'keyup') {
-      holdingShift = false;
-    } else if (e.type == 'keydown') {
-      holdingShift = true;
-    }
-  }
-
+  let lastSelected;
 
   function selectMultiBoxes( e ) {
+    let inBetween = false;
 
-    if (holdingShift) {
-      let currentItem = this.parentNode;
-      let nextItem = lastSelectedItem.nextElementSibling;
-      lastSelectedItem.style.background = "hotpink";
-      currentItem.style.background = "hotpink";
-
-      while ( nextItem !== currentItem ) {
-        let  currItemVal = nextItem.querySelector('input[type="checkbox"]').checked;
-        nextItem.querySelector('input[type="checkbox"]').checked = !currItemVal;
-        nextItem.style.background = 'pink';
-        nextItem = nextItem.nextElementSibling;
-      }
-
-    } else {
-      lastSelectedItem = this.parentNode;
+    if ( e.shiftKey ) {
+      checkboxes.forEach( checkbox => {
+        if ( checkbox == e.target || checkbox == lastSelected ) {
+          inBetween = !inBetween;
+        }
+        if ( inBetween ) {
+          checkbox.checked = true;
+        }
+      });
     }
 
+    lastSelected = e.target;
   }
-
-/*
-
-  QUESTION: How to determine if element is above or below on DOM tree?
-
-*/
 
 </script>
 </body>

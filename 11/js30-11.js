@@ -10,6 +10,7 @@
 
   function videoSeek( time ) {
     v.currentTime += time;
+    updateProgress();
    }
 
 
@@ -18,6 +19,20 @@
       v.volume = this.value;
     } else if (this.name == 'playbackRate') {
       v.playbackRate = this.value;
+    }
+    updateProgress();
+  }
+
+
+  function updateProgress() {
+    console.log('video duration...', v.duration, 'currentTime...', v.currentTime );
+    const progress = document.querySelector('.progress__filled');
+    if( v.currentTime === 0 ) {
+      progress.style.width = "0%";
+    } else {
+      const newWidth =`${Math.round((v.currentTime / v.duration)*100)}%`;
+      progress.style.width = newWidth;
+      console.log( 'progress.style.width',  `"${Math.round((v.currentTime / v.duration)*100)}%"`);
     }
   }
 
@@ -29,3 +44,6 @@
       videoSeek( Number(this.dataset.skip) )
     });
   })
+
+  v.addEventListener( 'canplay', updateProgress );
+  v.addEventListener( 'playing', updateProgress );

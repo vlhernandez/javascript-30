@@ -1,49 +1,70 @@
-  const playBtn = document.querySelector('.player__button');
-  const seekBtns = document.querySelectorAll('.player__button[data-skip]');
-  const inputs = document.querySelectorAll('input');
-  const v = document.querySelector('video');
+const playBtn = document.querySelector('.player__button.toggle');
+const seekBtns = document.querySelectorAll('.player__button[data-skip]');
+const inputRanges = document.querySelectorAll('input');
+const v = document.querySelector('video');
+const progress = document.querySelector('.progress');
+const progressBar = document.querySelector('.progress__filled');
+const toggleFull = document.querySelector('.fullScreen');
+let mouseDown = false;
+let fullScreen = false;
 
-  function togglePlayBack() {
-    const playBackAction = v.paused ? 'play' : 'pause';
-    v[playBackAction]();
-  }
+function toggleMouse() {
+  mouseDown = !mouseDown;
+}
 
-  function videoSeek( time ) {
-    v.currentTime += time;
-    updateProgress();
-   }
+function togglePlayBack() {
+  const playBackAction = v.paused ? 'play' : 'pause';
+  v[playBackAction]();
+}
 
-
-  function handleChange() {
-    if ( this.name == 'volume' ) {
-      v.volume = this.value;
-    } else if (this.name == 'playbackRate') {
-      v.playbackRate = this.value;
-    }
-    updateProgress();
-  }
+function videoSeek( ) {
+  const time = Number(this.dataset.skip)
+  v.currentTime += time;
+ }
 
 
-  function updateProgress() {
-    console.log('video duration...', v.duration, 'currentTime...', v.currentTime );
-    const progress = document.querySelector('.progress__filled');
-    if( v.currentTime === 0 ) {
-      progress.style.width = "0%";
+function handleRangeChange() {
+  v[this.name] = this.value;
+}
+
+
+function updateProgress() {
+  const progressBarWidth = Math.round((v.currentTime / v.duration) * 100);
+  progressBar.style.width = `${progressBarWidth}%`;
+}
+
+function handleScrubber(e) {
+  const scrubTo = e.offsetX
+  const barWidth = progress.offsetWidth;
+  v.currentTime = (scrubTo / barWidth) * v.duration;
+}
+
+function toggleFullScreen() {
+    const prevWidth = v.videoWidth;
+    if (fullScreen) {
+      v.width = prevWidth;
     } else {
-      const newWidth =`${Math.round((v.currentTime / v.duration)*100)}%`;
-      progress.style.width = newWidth;
-      console.log( 'progress.style.width',  `"${Math.round((v.currentTime / v.duration)*100)}%"`);
+      v.width = document.body.offsetWidth;
     }
-  }
+    fullScreen = !fullScreen
+}
 
-  v.addEventListener( 'click', togglePlayBack );
-  playBtn.addEventListener( 'click', togglePlayBack );
-  inputs.forEach( input => input.addEventListener( 'change', handleChange ))
-  seekBtns.forEach( btn => {
-    btn.addEventListener( 'click', function() {
-      videoSeek( Number(this.dataset.skip) )
-    });
-  })
 
-  v.addEventListener( 'canplay', updateProgress );
-  v.addEventListener( 'playing', updateProgress );
+v.addEventListener( 'click', togglePlayBack );
+v.addEventListener( 'canplay', updateProgress );
+v.addEventListener( 'timeupdate', updateProgress );
+
+playBtn.addEventListener( 'click', togglePlayBack );
+
+inputRanges.forEach( input => input.addEventListener( 'change', handleRangeChange ));
+
+seekBtns.forEach( btn => { btn.addEventListener( 'click', videoSeek ) });
+
+progress.addEventListener( 'click', handleScrubber );
+progress.addEventListener( 'mousemove', function(e) {
+  if (mouseDown) { handleScrubber(e) }
+});
+progress.addEventListener( 'mouseup', toggleMouse );
+progress.addEventListener( 'mousedown', toggleMouse );
+
+toggleFull.addEventListener( 'click', toggleFullScreen );

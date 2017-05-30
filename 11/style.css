@@ -2,11 +2,37 @@ body {
   min-height: 100vh;
   display: flex;
   justify-content: center;
+  align-items: center;
+}
+
+.player {
+  position: relative;
+  overflow: hidden;
+}
+
+.plaer__video {
+  width: 100%;
+}
+
+.player__controls {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  width: 100%;
+  transform: translateY(100%);
+  transition: all .25s;
+}
+
+.player:hover .player__controls {
+  transform: translateY(-10px);
 }
 
 .progress {
-  background: rgba( 0, 0, 0, .25 );
-  height: 20px;
+  width: 100%;
+  background: rgba( 255, 255, 255, .25 );
+  cursor: ew-resize;
 }
 
 .progress__filled {

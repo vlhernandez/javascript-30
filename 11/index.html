@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>HTML Video Player</title>
-  <!-- <link rel="stylesheet" href="style.css"> -->
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -22,39 +22,6 @@
      </div>
    </div>
 
-  <script>
-  const playBtn = document.querySelector('.player__button');
-  const otherBtns = document.querySelectorAll('.player__button[data-skip]');
-  const v = document.querySelector('video');
-
-  playBtn.addEventListener( 'click', function(e)  {
-    if (e.target.classList.contains( 'toggle' )){
-      pauseVideo();
-      e.target.classList.toggle('toggle');
-    } else {
-      playVideo()
-      e.target.classList.toggle('toggle');
-    }
-  });
-
-  otherBtns.forEach( function(btn) {
-    btn.addEventListener( 'click', function() {
-      videoSeek( Number(this.dataset.skip) )
-    });
-  })
-
-  function videoSeek( time ) {
-    v.currentTime = v.currentTime + time;
-   }
-
-  function pauseVideo() {
-    v.pause();
-  }
-
-  function playVideo() {
-    v.play();
-  }
-
-  </script>
+  <script src='js30-11.js'></script>
 </body>
 </html>

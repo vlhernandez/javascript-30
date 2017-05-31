@@ -1,13 +1,23 @@
+:root {
+  --base-color: #EC515D;
+}
 body {
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  /*css3 pattern gallery - carbon fibre */
+  background: radial-gradient(black 15%, transparent 16%) 0 0, radial-gradient(black 15%, transparent 16%) 8px 8px, radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 0 1px, radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 8px 9px;
+  background-color: #314157;
+  background-size: 6px 6px;
 }
 
 .player {
   position: relative;
   overflow: hidden;
+  border: 5px outset #fff;
+  box-shadow: 4px 4px 17px rgba(236, 81, 93,.5);
+  border-style: ridge;
 }
 
 .plaer__video {
@@ -21,21 +31,69 @@ body {
   justify-content: space-around;
   flex-wrap: wrap;
   width: 100%;
-  transform: translateY(100%);
+  transform: translateY(100%) translateY(-5px);
   transition: all .25s;
 }
 
 .player:hover .player__controls {
-  transform: translateY(-10px);
+  transform: translateY(0);
 }
 
 .progress {
-  width: 100%;
-  background: rgba( 255, 255, 255, .25 );
+  flex-basis: 100%;
+  background-color: rgba( 255, 255, 255, .25 );
   cursor: ew-resize;
 }
 
 .progress__filled {
-  background: hotpink;
+  background: var(--base-color);
   height: 20px;
+}
+
+input[type=range] {
+  -webkit-appearance: none;
+  background: transparent;
+}
+
+input[type=range]:focus {
+  outline: none
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 16px;
+  width: 16px;
+  margin-top: -3px;
+  border-radius: 50%;
+  background: var(--base-color);
+  box-shadow: 1px 1px 1px #000, 0px 0px 1px #0d0d0d;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+  height: 10px;
+  border-radius: 1.3px;
+  background: rgba(255, 255, 255, .75);
+}
+
+.player__button {
+  min-width: 50px;
+}
+
+button {
+  background: transparent;
+  border: none;
+  color: #fff;
+  padding: 10px;
+  margin-top: 4px;
+  font-size: 14px;
+}
+
+button:focus {
+  outline: none;
+}
+
+button.fullScreen {
+  background-image: url("icons/fullscreen_white_48x48.png");
+  background-size: contain;
+  background-repeat: no-repeat;
 }

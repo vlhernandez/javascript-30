@@ -17,6 +17,11 @@ function togglePlayBack() {
   v[playBackAction]();
 }
 
+function updateButton() {
+  const icon = v.paused ? '❚ ❚' : '►';
+  playBtn.innerText = icon;
+}
+
 function videoSeek( ) {
   const time = Number(this.dataset.skip)
   v.currentTime += time;
@@ -43,18 +48,21 @@ function toggleFullScreen() {
     const prevWidth = v.videoWidth;
     if (fullScreen) {
       v.width = prevWidth;
+      toggleFull.style.backgroundImage = "url('icons/fullscreen_white_48x48.png')";
     } else {
       v.width = document.body.offsetWidth;
+      toggleFull.style.backgroundImage = "url('icons/fullscreen_exit_white_48x48.png')";
     }
     fullScreen = !fullScreen
 }
 
-
 v.addEventListener( 'click', togglePlayBack );
+v.addEventListener( 'click', updateButton )
 v.addEventListener( 'canplay', updateProgress );
 v.addEventListener( 'timeupdate', updateProgress );
 
 playBtn.addEventListener( 'click', togglePlayBack );
+playBtn.addEventListener( 'click', updateButton );
 
 inputRanges.forEach( input => input.addEventListener( 'change', handleRangeChange ));
 

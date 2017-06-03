@@ -29,6 +29,23 @@
     </article>
 
   <script>
+
+    const images = document.querySelectorAll('img');
+    function slideIn() {
+      images.forEach( image => {
+        const imageTop = (window.scrollY + window.innerHeight) - image.height;
+        const bottom = image.offsetTop + image.height;
+
+        if ( window.scrollY > bottom/2) {
+          image.style.opacity = 1;
+        }
+        console.log( imageTop )
+      })
+
+    }
+
+    window.addEventListener( 'scroll', slideIn );
+
   </script>
   </body>
 

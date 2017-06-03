@@ -16,7 +16,7 @@
 
       <img class="align-right" src="https://images.unsplash.com/photo-1432107294469-414527cb5c65?dpr=1&amp;auto=format&amp;fit=crop&amp;w=1500&amp;h=1000&amp;q=80&amp;cs=tinysrgb&amp;crop=&amp;" />
 
-      <p>Affogato, mocha milk extraction macchiato turkish, cream that wings beans medium est lungo plunger pot. Americano strong, robust that, fair trade whipped, cappuccino id, americano to go cappuccino con panna americano frappuccino strong beans. Sweet mazagran variety, kopi-luwak id, mocha, cup grounds, latte froth, trifecta breve kopi-luwak at plunger pot. Americano spoon, cup, irish, white, single shot, so eu caffeine a blue mountain, filter dripper espresso blue mountain coffee.</p>
+      <p>Black mug, percolator rich, crema and, espresso acerbic, cinnamon, robust flavour arabica ristretto cream grounds, doppio organic black robust at sugar instant affogato lungo, single shot frappuccino lungo et crema. Barista, extra as caramelization et, saucer extra wings percolator saucer, robust, beans ristretto skinny cortado, whipped, foam trifecta viennese, french press, espresso doppio con panna, froth french press pumpkin spice americano aged espresso, java so caramelization breve barista. Shop cultivar redeye, cappuccino, instant, foam java, a, steamed instant, coffee, seasonal cream so café au lait java aged fair trade, grinder extraction, carajillo, organic single origin steamed single shot white kopi-luwak half and half id barista shop coffee sweet. Qui, dripper in filter est coffee, mazagran americano dripper, kopi-luwak cup medium lungo, americano dripper latte breve siphon body aroma. Pumpkin spice strong, americano, cortado robust aroma skinny, ut iced, caffeine cup seasonal, aromatic wings, aromatic frappuccino cultivar single shot, redeye kopi-luwak barista, skinny whipped half and half mocha cortado steamed doppio to go aromatic that viennese. Cortado café au lait, body pumpkin spice, trifecta, turkish barista, breve seasonal whipped, body café au lait qui galão, mazagran sugar steamed single origin filter. As, cortado plunger pot, mug aged sweet seasonal filter, carajillo, trifecta latte barista single shot aftertaste barista, irish qui plunger pot at mazagran affogato qui lungo, robust steamed bar mug acerbic whipped. And, aromatic, froth in beans, strong saucer seasonal at crema, irish eu cappuccino coffee coffee, sweet ristretto mazagran, latte whipped, variety iced, qui and mazagran a pumpkin spice espresso filter latte extra, café au lait dark sit steamed shop. Shop, mazagran, extraction a, single origin steamed crema, aged saucer cream, mocha, dark percolator, grounds et black, coffee half and half wings sit acerbic sugar macchiato siphon sit in irish arabica steamed medium grinder barista. Sit, irish cream spoon, et macchiato shop, qui aftertaste froth acerbic chicory, medium, coffee coffee a arabica grinder single shot redeye latte, aroma turkish, et decaffeinated single origin skinny crema affogato. Instant, percolator, whipped robust qui, est grounds extraction fair trade, lungo, blue mountain, single origin, mug macchiato, filter, plunger pot breve plunger pot aroma dripper, trifecta cup shop so qui aromatic barista eu, strong, crema, beans sit con panna ut plunger pot. Dark, redeye doppio chicory percolator lungo, as percolator bar qui cup, cortado, grinder a pumpkin spice spoon cup as french press a flavour java cinnamon ristretto bar, redeye caramelization plunger pot cup flavour instant.</p>
 
       <img class="align-left" src="https://images.unsplash.com/photo-1469957761306-556935073eba?dpr=1&amp;auto=format&amp;fit=crop&amp;w=1500&amp;h=1050&amp;q=80&amp;cs=tinysrgb&amp;crop=&amp;" />
 
@@ -29,22 +29,40 @@
     </article>
 
   <script>
+    function debounce(func, wait = 20, immediate = true) {
+      var timeout;
+      return function() {
+        var context = this, args = arguments;
+        var later = function() {
+          timeout = null;
+          if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+      };
+    };
 
     const images = document.querySelectorAll('img');
     function slideIn() {
       images.forEach( image => {
-        const imageTop = (window.scrollY + window.innerHeight) - image.height;
-        const bottom = image.offsetTop + image.height;
+        const slideIn = (window.scrollY + window.innerHeight) - image.height/3;
+        const imageBottom = image.offsetTop + image.height;
+        const scrolledPast = window.scrollY > imageBottom;
+        const isOnScreen = slideIn > image.offsetTop;
 
-        if ( window.scrollY > bottom/2) {
+        if ( slideIn > image.offsetTop && !scrolledPast ) {
           image.style.opacity = 1;
+          image.classList.add('active')
+        } else {
+          image.style.opacity = 0;
+          image.classList.remove('active');
         }
-        console.log( imageTop )
       })
-
     }
 
-    window.addEventListener( 'scroll', slideIn );
+    window.addEventListener( 'scroll', debounce(slideIn) );
 
   </script>
   </body>

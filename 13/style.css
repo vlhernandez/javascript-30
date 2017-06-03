@@ -31,6 +31,7 @@
       img {
         max-width: 100%;
         width: 400px;
+        transition: all ease .5s;
       }
 
       img.align-left {
@@ -47,6 +48,10 @@
         opacity: 0;
       }
 
+      img.active {
+        transform: translateX(0);
+      }
+
       article {
         font-family: 'Libre Franklin', sans-serif;
         max-width: 700px;
@@ -55,4 +60,5 @@
         font-size: 20px;
         line-height: 1.4;
         margin: 0 auto;
+        overflow-x: hidden;
       }

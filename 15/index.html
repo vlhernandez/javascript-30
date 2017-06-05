@@ -2,23 +2,37 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Santa's List</title>
+  <title>Letters to Santa</title>
+  <link href="https://fonts.googleapis.com/css?family=Patrick+Hand+SC|Shrikhand" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Wish list</h1>
-  <ul class="wish-list">
-    <li>Conjuring the list</li>
-  </ul>
-  <form class="add-gifts">
-    <input type="text" name="gift" placeholder="Gift Idea"/>
-    <input type="submit" value="🎂 Make a Wish" />
-  </form>
+  <div class="content">
+    <h2>Dear Santa,</h2>
+    <p>I've been<input type="text" class="been-good" />, please send:</p>
+    <ul class="wish-list">
+      <li>Conjuring the list</li>
+    </ul>
+    <form class="add-gifts">
+      <input type="text" name="gift" placeholder="Gift Idea" required/>
+      <input type="submit" value="Add Wish" />
+    </form>
+  </div>
 
   <script>
+    const behavior = document.querySelector('.please-send');
     const addGifts = document.querySelector('.add-gifts');
     const wishList = document.querySelector('.wish-list');
     const gifts = JSON.parse(localStorage.getItem('items')) || [];
+
+    function populateList( items = [], list) {
+      list.innerHTML = items.map( (item, i ) => {
+        return `<li>
+          <input type="checkbox" data-index=${i} id="gift-${i}" ${item.received ? "checked" : "" } />
+          <label for="gift-${i}">${item.name}</label>
+        </li>`
+      }).join("");
+    }
 
     function addGift(e) {
       e.preventDefault();
@@ -35,16 +49,20 @@
       this.reset();
     }
 
-    function populateList( items = [], list) {
-      list.innerHTML = items.map( (item, i ) => {
-        return `<li>
-          <input type="checkbox" id="gift-${i}" ${item.received ? "checked" : "" } />
-          <label for="gift-${i}">${item.name}</label>
-        </li>`
-      }).join("");
+    function markReceived(e) {
+      if (!e.target.matches('input[type="checkbox"]')) return;
+
+      const i = (e.target.dataset['index']);
+      gifts[i].received = !gifts[i].received;
+      localStorage.setItem( 'items', JSON.stringify(gifts) );
+    }
+
+    function pleaseSend(e) {
+      console.log(e);
     }
 
     addGifts.addEventListener( 'submit', addGift );
+    wishList.addEventListener( 'click', markReceived );
     populateList( gifts, wishList );
   </script>
 </body>

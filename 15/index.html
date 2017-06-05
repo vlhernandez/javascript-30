@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Santa's List</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Wish list</h1>
+  <ul class="wish-list">
+    <li>Conjuring the list</li>
+  </ul>
+  <form class="add-gifts">
+    <input type="text" name="gift" placeholder="Gift Idea"/>
+    <input type="submit" value="🎂 Make a Wish" />
+  </form>
+
+  <script>
+    const addGifts = document.querySelector('.add-gifts');
+    const wishList = document.querySelector('.wish-list');
+    const gifts = JSON.parse(localStorage.getItem('items')) || [];
+
+    function addGift(e) {
+      e.preventDefault();
+
+      const giftName = this.querySelector('input[name="gift"]').value;
+      const giftItem = { name: giftName,
+                         received: false
+                       };
+
+      gifts.push( giftItem );
+      populateList( gifts, wishList )
+      localStorage.setItem( 'items', JSON.stringify(gifts) );
+
+      this.reset();
+    }
+
+    function populateList( items = [], list) {
+      list.innerHTML = items.map( (item, i ) => {
+        return `<li>
+          <input type="checkbox" id="gift-${i}" ${item.received ? "checked" : "" } />
+          <label for="gift-${i}">${item.name}</label>
+        </li>`
+      }).join("");
+    }
+
+    addGifts.addEventListener( 'submit', addGift );
+    populateList( gifts, wishList );
+  </script>
+</body>
+</html>

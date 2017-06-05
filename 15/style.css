@@ -1,0 +1,10 @@
+html {
+  /*background-image: url("https://images.unsplash.com/photo-1481495567254-6d65c5883888?dpr=1&amp;auto…amp;fit=crop&amp;w=1500&amp;h=1000&amp;q=80&amp;cs=tinysrgb&amp");*/
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+}
+
+h1 {
+}

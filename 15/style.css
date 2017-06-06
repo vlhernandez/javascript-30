@@ -61,11 +61,19 @@ li {
   margin-top: 30px;
 }
 
-.add-gifts input{
+input{
   border: 1px solid green;
   font-family: helvetica;
   font-size: 16px;
+  margin-top: 10px;
 }
+
+input[type="submit"],
+input[type="button"] {
+  color: white;
+  background-color: green;
+}
+
 
 input::placeholder{
   font-size: 16px;

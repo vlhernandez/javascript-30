@@ -9,61 +9,20 @@
 <body>
   <div class="content">
     <h2>Dear Santa,</h2>
-    <p>I've been<input type="text" class="been-good" />, please send:</p>
+    <p>I've been<span class="behavior" contenteditable="true"/></span>, please send:</p>
     <ul class="wish-list">
       <li>Conjuring the list</li>
     </ul>
     <form class="add-gifts">
       <input type="text" name="gift" placeholder="Gift Idea" required/>
       <input type="submit" value="Add Wish" />
+
+      <input type="button" data-btnaction="check-all" value="Check All" />
+      <input type="button" data-btnaction="uncheck-all" value="Uncheck All" />
+      <input type="button" data-btnaction="clear-all" value="Clear All" />
     </form>
   </div>
 
-  <script>
-    const behavior = document.querySelector('.please-send');
-    const addGifts = document.querySelector('.add-gifts');
-    const wishList = document.querySelector('.wish-list');
-    const gifts = JSON.parse(localStorage.getItem('items')) || [];
-
-    function populateList( items = [], list) {
-      list.innerHTML = items.map( (item, i ) => {
-        return `<li>
-          <input type="checkbox" data-index=${i} id="gift-${i}" ${item.received ? "checked" : "" } />
-          <label for="gift-${i}">${item.name}</label>
-        </li>`
-      }).join("");
-    }
-
-    function addGift(e) {
-      e.preventDefault();
-
-      const giftName = this.querySelector('input[name="gift"]').value;
-      const giftItem = { name: giftName,
-                         received: false
-                       };
-
-      gifts.push( giftItem );
-      populateList( gifts, wishList )
-      localStorage.setItem( 'items', JSON.stringify(gifts) );
-
-      this.reset();
-    }
-
-    function markReceived(e) {
-      if (!e.target.matches('input[type="checkbox"]')) return;
-
-      const i = (e.target.dataset['index']);
-      gifts[i].received = !gifts[i].received;
-      localStorage.setItem( 'items', JSON.stringify(gifts) );
-    }
-
-    function pleaseSend(e) {
-      console.log(e);
-    }
-
-    addGifts.addEventListener( 'submit', addGift );
-    wishList.addEventListener( 'click', markReceived );
-    populateList( gifts, wishList );
-  </script>
+  <script src="js30-15.js"></script>
 </body>
 </html>

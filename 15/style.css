@@ -42,6 +42,8 @@ ul, p {
   font-size: 25px;
   padding-bottom: 0;
   max-width: 200px;
+  min-width: 3em;
+  display: inline-block;
 }
 
 ul {

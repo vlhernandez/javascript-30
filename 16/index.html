@@ -7,6 +7,41 @@
   <div class="main">
     <h1>PAR-TAY!!!</h1>
   </div>
-<script></script>
+
+  <style>
+    .main {
+      display: flex;
+      min-height: 100vh;
+      justify-content: center;
+      align-items: center;
+      font-size: 40px;
+    }
+
+  </style>
+<script>
+  const main = document.querySelector('.main');
+  const party = main.querySelector('h1');
+  const stretch = 100;
+
+  function mouseCoords(e) {
+    const { offsetWidth: width, offsetHeight: height } = main
+    let { offsetX: x, offsetY: y } = e
+
+    if ( this !== e.target) {
+      // x = ( width - e.target.offsetWidth ) / 2  + x;
+      // y = ( height - e.target.offsetHeight ) / 2 + y;
+      x = e.target.offsetLeft + x;
+      y = e.target.offsetTop + y;
+    }
+
+    const stretchRangeX = Math.round(  ( x/width * stretch ) - (stretch / 2) );
+    const stretchRangeY = Math.round(  ( x/width * stretch ) - (stretch / 2) );
+
+    party.style.textShadow = `${stretchRangeX}px ${stretchRangeY}px 0 pink`;
+  }
+
+  main.addEventListener( 'mousemove', mouseCoords );
+
+</script>
 </body>
 </html>

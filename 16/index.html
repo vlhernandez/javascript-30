@@ -9,7 +9,13 @@
   </div>
 
   <style>
+    body {
+      background-image: url('https://unsplash.it/1200/1200?image=611');
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
     .main {
+      color:#fff;
       display: flex;
       min-height: 100vh;
       justify-content: center;
@@ -35,9 +41,10 @@
     }
 
     const stretchRangeX = Math.round(  ( x/width * stretch ) - (stretch / 2) );
-    const stretchRangeY = Math.round(  ( x/width * stretch ) - (stretch / 2) );
+    const stretchRangeY = Math.round(  ( y/height* stretch ) - (stretch / 2) );
 
-    party.style.textShadow = `${stretchRangeX}px ${stretchRangeY}px 0 pink`;
+    party.style.textShadow = `${stretchRangeX}px ${stretchRangeY}px 0 pink,
+                              ${-1*stretchRangeX}px ${-1*stretchRangeY}px 0 grey`;
   }
 
   main.addEventListener( 'mousemove', mouseCoords );

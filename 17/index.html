@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sorting without articles</title>
+</head>
+<body>
+  <ol class="band-list">
+  </ol>
+
+<script>
+const dictionary = { the: 'the', a: 'a', an: 'an' }
+const bands = ['The Plot in You', 'The Devil Wears Prada', 'Pierce the Veil', 'Norma Jean', 'The Bled', 'Say Anything', 'The Midway State', 'We Came as Romans', 'Counterparts', 'Oh, Sleeper', 'A Skylit Drive', 'Anywhere But Here', 'An Old Dog'];
+
+const noArts = bands.map( band => {
+  return { bandSplit: band.split(" "),
+           bandName: band,
+           sortableName: "",
+         };
+})
+
+noArts.forEach( entry => {
+  if ( (entry.bandSplit[0]).toLowerCase() in dictionary ) {
+    entry.bandSplit.shift();
+  }
+  entry.sortableName = entry.bandSplit.join( ' ' )
+})
+
+
+noArts.sort( function(a, b) {
+  if (a.sortableName < b.sortableName) {
+    return -1;
+  }
+  if (a.sortableName > b.sortableName) {
+    return 1;
+  }
+  return 0;
+});
+
+const listEl =  document.querySelector('.band-list');
+const html =  noArts.map( band => {
+  return `<li>${band.bandName}</li>`
+}).join(' ')
+
+listEl.innerHTML = html;
+
+</script>
+</body>
+</html>

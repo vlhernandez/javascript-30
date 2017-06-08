@@ -2,8 +2,41 @@
 <html>
 <head>
     <title>Sorting without articles</title>
+    <style>
+        body{
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          margin: 0;
+          background-color: #222;
+          color: #fff;
+          font-size: 18px;
+          font-family: sans-serif;
+        }
+        h2 {
+          text-align: center;
+        }
+        ol {
+          padding: 40px;
+          background-color: hsla(0, 0%, 0%, .7);
+          min-width: 400px;
+        }
+
+        li {
+          padding: .75em .5em;
+          border-bottom: 3px solid hsla(0, 0%, 20%, .7);
+          list-style-position: inside;
+        }
+        li:last-of-type {
+          border-bottom: 0;
+        }
+
+
+    </style>
 </head>
 <body>
+  <h2>A list of sorted bands</h2>
   <ol class="band-list">
   </ol>
 

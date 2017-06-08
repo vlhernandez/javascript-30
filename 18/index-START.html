@@ -184,12 +184,19 @@
 <script>
   const videos = document.querySelector('.videos');
   const videoElems = videos.querySelectorAll('li[data-time]')
-  const times = {}
-  videoElems.forEach(el => {
-    times[el.dataset['time']] = el.dataset['time'].split(":");
+  const times = []
+  videoElems.forEach( (el,i) => {
+    times[i] = el.dataset['time'].split(":");
   })
   console.log(times)
 
+  const hrs = times.reduce( function(acc, val) {
+    return acc + Number(val[0])
+  }, 0)
+
+  const sec = times.reduce( function(acc, val) {
+    return acc + Number(val[1]);
+  }, 0)
 
 </script>
 </body>

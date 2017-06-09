@@ -183,24 +183,22 @@
   </ul>
 <script>
   const videos = document.querySelector('.videos');
-  const videoElems = videos.querySelectorAll('[data-time]')
+  const videoElems = Array.from(videos.querySelectorAll('[data-time]'));
   const times = []
+
   videoElems.forEach( (el,i) => {
     times[i] = el.dataset['time'].split(":");
   })
 
   const totSecs = times.reduce( function(acc, val) {
-    return acc + Number(val[0])
-  }, 0) * 60 + times.reduce( function(acc, val) {
-    return acc + Number(val[1]);
-  }, 0);
+    return acc + (Number(val[0]) * 60) + Number(val[1])
+  }, 0) ;
 
   const hrs = Math.floor(totSecs / 3600);
   const mins = Math.floor((totSecs % 3600) / 60);
   const secs = Math.floor((totSecs % 3600) % 60)
 
-  console.log(totSecs + ' is ' + hrs + 'hrs ' + mins + 'mins ' + secs + 'secs')
-
+  console.log(totSecs+'s' + ' is ' + hrs + 'hrs ' + mins + 'mins ' + secs + 's')
 </script>
 </body>
 </html>

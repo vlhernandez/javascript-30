@@ -190,13 +190,17 @@
   })
   console.log(times)
 
-  const hrs = times.reduce( function(acc, val) {
+  let hrs = times.reduce( function(acc, val) {
     return acc + Number(val[0])
   }, 0)
 
-  const sec = times.reduce( function(acc, val) {
+  let secs = times.reduce( function(acc, val) {
     return acc + Number(val[1]);
   }, 0)
+
+  hrs = hrs + Math.floor(secs/60);
+  secs = secs % 60;
+  console.log( 'total hrs...', hrs, 'total secs...', secs)
 
 </script>
 </body>

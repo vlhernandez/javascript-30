@@ -188,19 +188,20 @@
   videoElems.forEach( (el,i) => {
     times[i] = el.dataset['time'].split(":");
   })
-  console.log(times)
 
-  let hrs = times.reduce( function(acc, val) {
+  let sumOfMins = times.reduce( function(acc, val) {
     return acc + Number(val[0])
   }, 0)
 
-  let secs = times.reduce( function(acc, val) {
+  let sumOfSecs = times.reduce( function(acc, val) {
     return acc + Number(val[1]);
-  }, 0)
+  }, 0);
 
-  hrs = hrs + Math.floor(secs/60);
-  secs = secs % 60;
-  console.log( 'total hrs...', hrs, 'total secs...', secs)
+  let hrs = Math.floor(sumOfMins / 60);
+  hrs = hrs + secs / 3600;
+
+  console.log(sumOfMins,'mins',sumOfSecs,'secs')
+  console.log(hrs+':'+ sumOfMins%60 +':'+sumOfSecs)
 
 </script>
 </body>

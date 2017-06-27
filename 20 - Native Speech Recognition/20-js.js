@@ -12,9 +12,13 @@ recognition.addEventListener('result', e => {
   const words = Array.from(e.results)
     .map(result => result[0])
     .map(result => result.transcript)
-    .join(" ");
+    .join(' ');
 
-  console.log(words);
+    p.textContent = words;
+    if(e.results[0].isFinal) {
+      p = document.createElement('p');
+      transcript.appendChild(p)
+    }
 })
 
 recognition.addEventListener('end', recognition.start);

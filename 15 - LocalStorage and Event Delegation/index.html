@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Letters to Santa</title>
+  <link href="https://fonts.googleapis.com/css?family=Patrick+Hand+SC|Shrikhand" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="content">
+    <h2>Dear Santa,</h2>
+    <p>I've been<span class="behavior" contenteditable="true"/></span>, please send:</p>
+    <ul class="wish-list">
+      <li>Conjuring the list</li>
+    </ul>
+    <form class="add-gifts">
+      <input type="text" name="gift" placeholder="Gift Idea" required/>
+      <input type="submit" value="Add Wish" />
+
+      <input type="button" data-btnaction="check-all" value="Check All" />
+      <input type="button" data-btnaction="uncheck-all" value="Uncheck All" />
+      <input type="button" data-btnaction="clear-all" value="Clear All" />
+    </form>
+  </div>
+
+  <script src="js30-15.js"></script>
+</body>
+</html>

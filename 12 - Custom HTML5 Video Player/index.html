@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Key Sequence Detector</title>
+  <style>
+   body {
+     color: #fff;
+     display: flex;
+     flex-direction: column;
+     min-height: 100vh;
+     justify-content: center;
+     align-items: center;
+   }
+   a {
+    color: #fff;
+   }
+   iframe {
+     border: 6px solid #fff;
+     box-shadow: 6px 6px 10px rgba(0,0,0,.3);
+   }
+
+  </style>
+</head>
+<body>
+  <script>
+    const passcode = 'pesker';
+    const keys = [];
+    const embed = `<iframe src="https://giphy.com/embed/y8Mz1yj13s3kI" width="480" height="360" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/excited-oprah-shouting-y8Mz1yj13s3kI">via GIPHY</a></p>`;
+
+    function handleKeyInput(e) {
+      keys.push(e.key);
+      keys.splice( 0, keys.length - passcode.length );
+      console.log(keys);
+      if ( keys.length == passcode.length && keys.join('') == passcode) {
+        console.log( '%cYou Figured The Code Word!!', 'font-size: 40px; color:green; font-variant:small-caps;');
+        document.body.innerHTML = embed;
+        document.body.style.backgroundColor = '#af1f1f';
+      }
+    };
+    document.documentElement.addEventListener( 'keyup', handleKeyInput );
+  </script>
+</body>
+</html>

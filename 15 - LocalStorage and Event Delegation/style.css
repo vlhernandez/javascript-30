@@ -1,0 +1,80 @@
+html {
+  background-image: url(https://images.unsplash.com/photo-1481574548075-e4c8feff4ef6?dpr=1&auto=format&fit=crop&w=1500&h=1000&q=80&cs=tinysrgb&crop=&bg=);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+}
+
+.content {
+  margin: 1em calc(50% - 250px); /* max width of 500px */
+  font-size: 18px;
+  padding: 40px;
+  border: 16px solid transparent;
+  border-image: 16 repeating-linear-gradient( -45deg, red 0, red 1em, white 0, white 2em, green 0, green 3em, white 0, white 4em);
+  background-color: rgba(255,255,255,.96);
+}
+
+h2 {
+  font-family: 'Shrikhand', cursive;
+  font-size: 2em;
+  color: darkgreen;
+}
+
+input {
+  padding: 7px 14px;
+  border: 0;
+}
+
+ul, p {
+  font-size: 30px;
+  font-family: 'Patrick Hand SC', cursive;
+}
+
+.behavior {
+  font-family: 'Patrick Hand SC', cursive;
+  border-bottom: 1px solid black;
+  background: transparent;
+  margin-right: .25em;
+  margin-left: .5em;
+  color: green;
+  text-align: center;
+  font-size: 25px;
+  padding-bottom: 0;
+  max-width: 200px;
+  min-width: 3em;
+  display: inline-block;
+}
+
+ul {
+  font-size: 40px;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  border-bottom: 2px solid lightblue;
+}
+
+.add-gifts {
+  margin-top: 30px;
+}
+
+input{
+  border: 1px solid green;
+  font-family: helvetica;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+input[type="submit"],
+input[type="button"] {
+  color: white;
+  background-color: green;
+}
+
+
+input::placeholder{
+  font-size: 16px;
+}

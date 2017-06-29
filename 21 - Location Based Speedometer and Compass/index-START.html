@@ -11,7 +11,7 @@
 
   <h1 class="speed">
     <span class="speed-value">0</span>
-    <span class="units">KM/H</span>
+    <span class="units">mph</span>
   </h1>
 
   <style>
@@ -57,6 +57,18 @@
     /*Compass: https://thenounproject.com/search/?q=compass&i=592352*/
   </style>
   <script>
+    const arrow = document.querySelector('.arrow');
+    const speed = document.querySelector('.speed-value');
+
+    navigator.geolocation.watchPosition( (data) => {
+      console.log(data)
+      speed.textContent = (data.coords.speed / .62137119).toFixed(2);
+      arrow.style.transform = `rotate(${data.coords.heading}deg)`;
+    }, (err) => {
+      console.err();
+      alert('Oops, blocked access to geolocation!');
+    });
+
   </script>
 </body>
 </html>

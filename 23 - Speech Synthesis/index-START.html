@@ -35,29 +35,47 @@
   const options = document.querySelectorAll('[type="range"], [name="text"]');
   const speakButton = document.querySelector('#speak');
   const stopButton = document.querySelector('#stop');
+  msg.text = document.querySelector('[name="text"]').value;
 
   function populateVoices() {
     voices = this.getVoices();
+    voices = voices.filter( voice => voice.lang.includes(navigator.language))
+                   .map( voice => `<option value="${voice.name}">${voice.name}</option>`)
+    voicesDropdown.innerHTML = voices;
+  }
+
+  function stopSpeaking() {
+    speechSynthesis.pause();
   }
 
   function speak() {
     speechSynthesis.speak(msg);
+    speechSynthesis.paused ? speechSynthesis.resume() : speechSynthesis.speak(msg);
   }
 
   function populateText(e) {
-    msg.text = e.target.value;
+    if(e.target.name === 'text') {
+      msg.text = e.target.value;
+    } else if ( e.target.name === 'rate') {
+      msg.rate =  parseFloat(e.target.value);
+    } else if (e.target.name === 'pitch'){
+      msg.pitch = parseFloat(e.target.value);
+    }else {return}
   }
 
-  options.forEach( option => {
-    console.log(option);
-    if(option.type != 'range') {
-      addEventListener('input', populateText)
-    }
-
-  })
 
   speechSynthesis.addEventListener('voiceschanged', populateVoices)
+
   speakButton.addEventListener('click', speak)
+  stopButton.addEventListener('click', stopSpeaking);
+
+  options.forEach( option => {
+    addEventListener('input', populateText);
+    if(option.type === 'range') {
+      addEventListener('change', populateText);
+    }
+  })
+
 </script>
 
 </body>

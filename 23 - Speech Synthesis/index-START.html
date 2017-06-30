@@ -39,9 +39,17 @@
 
   function populateVoices() {
     voices = this.getVoices();
-    voices = voices.filter( voice => voice.lang.includes(navigator.language))
-                   .map( voice => `<option value="${voice.name}">${voice.name}</option>`)
-    voicesDropdown.innerHTML = voices;
+    voicesDropdown.innerHTML = voices.filter( voice => voice.lang.includes(navigator.language))
+     .map( voice => `<option value="${voice.name}">${voice.name} (${voice.lang})</option>`)
+     .join(" ");
+  }
+
+  function setVoice(e) {
+    voices.forEach( voice => {
+      if(voice.name === e.target.value) {
+        msg.voice = voice;
+      }
+    })
   }
 
   function stopSpeaking() {
@@ -65,16 +73,8 @@
 
 
   speechSynthesis.addEventListener('voiceschanged', populateVoices)
+  voicesDropdown.addEventListener('change', setVoice)
 
-  speakButton.addEventListener('click', speak)
-  stopButton.addEventListener('click', stopSpeaking);
-
-  options.forEach( option => {
-    addEventListener('input', populateText);
-    if(option.type === 'range') {
-      addEventListener('change', populateText);
-    }
-  })
 
 </script>
 

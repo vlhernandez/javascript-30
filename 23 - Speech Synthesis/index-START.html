@@ -39,42 +39,39 @@
 
   function populateVoices() {
     voices = this.getVoices();
-    voicesDropdown.innerHTML = voices.filter( voice => voice.lang.includes(navigator.language))
-     .map( voice => `<option value="${voice.name}">${voice.name} (${voice.lang})</option>`)
+    voicesDropdown.innerHTML = voices.map( voice => `<option value="${voice.name}">${voice.name} (${voice.lang})</option>`)
      .join(" ");
   }
 
   function setVoice(e) {
-    voices.forEach( voice => {
-      if(voice.name === e.target.value) {
-        msg.voice = voice;
-      }
-    })
+    msg.voice = voices.find( voice => voice.name === this.value );
+    toggleSpeech();
   }
 
-  function stopSpeaking() {
-    speechSynthesis.pause();
+  function toggleSpeech( startOver = true ) {
+    speechSynthesis.cancel();
+    if(startOver) {
+      speechSynthesis.speak(msg);
+    }
   }
 
-  function speak() {
-    speechSynthesis.speak(msg);
-    speechSynthesis.paused ? speechSynthesis.resume() : speechSynthesis.speak(msg);
-  }
-
-  function populateText(e) {
-    if(e.target.name === 'text') {
-      msg.text = e.target.value;
-    } else if ( e.target.name === 'rate') {
-      msg.rate =  parseFloat(e.target.value);
-    } else if (e.target.name === 'pitch'){
-      msg.pitch = parseFloat(e.target.value);
-    }else {return}
+  function setOption() {
+    msg[this.name] = this.value;
+    toggleSpeech();
   }
 
 
-  speechSynthesis.addEventListener('voiceschanged', populateVoices)
-  voicesDropdown.addEventListener('change', setVoice)
+  speechSynthesis.addEventListener('voiceschanged', populateVoices);
+  voicesDropdown.addEventListener('change', setVoice);
+  speakButton.addEventListener('click', toggleSpeech);
+  stopButton.addEventListener('click', toggleSpeech(false));
 
+  options.forEach( option => {
+    option.addEventListener( 'change', setOption );
+    if(option.name === 'text') {
+      option.addEventListener( 'input', setOption );
+    }
+  })
 
 </script>
 

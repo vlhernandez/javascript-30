@@ -214,7 +214,11 @@
 
   function handleEnter() {
     this.classList.add('trigger-enter');
-    setTimeout( () => this.classList.add('trigger-enter-active'), 150);
+    setTimeout( () => {
+      if(this.classList.contains('trigger-enter')){
+        this.classList.add('trigger-enter-active')
+      }
+    }, 150);
     puppyDiv.classList.add('open');
 
     const dropdown = this.querySelector('.dropdown');
@@ -224,14 +228,13 @@
     const coords = {
       height: dropdownCoords.height,
       width: dropdownCoords.width,
-      top: dropdownCoords.top = navCoords.top,
-      left: dropdownCoords.left,
+      top: dropdownCoords.top - navCoords.top,
+      left: dropdownCoords.left - navCoords.left,
     }
-    console.log(coords);
-    puppyDiv.style.height = coords.height +'px';
-    puppyDiv.style.width = coords.width +'px';
-    puppyDiv.style.top = coords.top +'px';
-    puppyDiv.style.left = coords.left +'px';
+    puppyDiv.style.setProperty( 'height',  `${coords.height}px`);
+    puppyDiv.style.setProperty( 'width',  `${coords.width}px`);
+    puppyDiv.style.setProperty( 'top',  `${coords.top}px`);
+    puppyDiv.style.setProperty( 'left',  `${coords.left}px`);
   }
 
   function handleLeave() {

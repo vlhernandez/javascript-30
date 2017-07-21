@@ -1,9 +1,13 @@
+let countDownTimer;
+const timerDisplay = document.querySelector(".display__time-left");
+const  endTimeDisplay = document.querySelector(".display__end-time");
+
 function timer(seconds) {
-  let countDownTimer;
   const now = Date.now();
   const later = now + seconds * 1000;
-
+  console.log({later})
   displayTimeLeft(seconds);
+  displayEndTime(later);
 
   countDownTimer = setInterval(() => {
     const secsLeft = Math.round(( later - Date.now() ) / 1000);
@@ -15,9 +19,22 @@ function timer(seconds) {
   }, 1000);
 }
 
+
 function displayTimeLeft(seconds) {
-  const timeLeft = document.querySelector(".display__time-left");
-  const mins = Math.round(seconds / 60) < 10 ? "0" + Math.round(seconds / 60) :Math.round(seconds / 60) ;
-  const secs = Math.round(seconds % 60) < 10 ? "0" + Math.round(seconds % 60) : Math.round(seconds % 60);
-  timeLeft.innerText = `${mins}:${secs}`;
+  const  mins = Math.floor(seconds / 60);
+  const secs = Math.floor(seconds % 60);
+  const timer = `${mins < 10 ? "0" : ""}${mins}:${secs < 10 ? "0" : ""}${secs}`;
+
+  document.title = timer;
+  timerDisplay.textContent = timer;
+}
+
+
+function displayEndTime(time) {
+  const end = new Date(time);
+  const hour = end.getHours();
+  const mins = end.getMinutes();
+  const endTime = `${hour > 12 ? hour - 12 : hour}:${mins < 10 ? "0" : ""}${mins}${hour < 12 ? 'am' : 'pm'}`
+
+  endTimeDisplay.textContent = `Return by ${endTime}`;
 }

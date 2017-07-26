@@ -1,11 +1,12 @@
 let countDownTimer;
 const timerDisplay = document.querySelector(".display__time-left");
-const  endTimeDisplay = document.querySelector(".display__end-time");
+const endTimeDisplay = document.querySelector(".display__end-time");
+const controls = document.querySelectorAll('[data-time]');
 
 function timer(seconds) {
+  clearInterval(countDownTimer);
   const now = Date.now();
   const later = now + seconds * 1000;
-  console.log({later})
   displayTimeLeft(seconds);
   displayEndTime(later);
 
@@ -38,3 +39,14 @@ function displayEndTime(time) {
 
   endTimeDisplay.textContent = `Return by ${endTime}`;
 }
+
+controls.forEach(control => control.addEventListener("click", function(e){
+  timer(parseInt(this.dataset.time));
+}))
+
+document.customForm.addEventListener('submit', function(e) {
+  e.preventDefault();
+  const secs = this.minutes.value * 60;
+  timer(parseInt(secs));
+  this.reset();
+});
